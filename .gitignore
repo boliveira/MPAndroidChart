@@ -44,3 +44,7 @@ build/
 target/
 
 .DS_Store
+MPChartLib/.settings/org.eclipse.buildship.core.prefs
+MPChartExample/.settings/org.eclipse.buildship.core.prefs
+.vscode/settings.json
+.settings/org.eclipse.buildship.core.prefs
