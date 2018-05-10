@@ -154,7 +154,7 @@ public class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
                 mBodyBuffers[2] = (xPos + 0.5f - barSpace);
                 mBodyBuffers[3] = open * phaseY;
 
-                Log.d("[CANDLE_STICK_CHART_RENDERER]", "XPOS: " + xPos + " , CLOSE: ", close + " , PHASEY: ", phaseY + " , OPEN: " + open + " , BARSPACE: ", barSpace.toString());
+                Log.d("[CANDLE_STICK_CHART_RENDERER]", "XPOS: " + xPos + " , CLOSE: ", close + " , PHASEY: ", phaseY + " , OPEN: " + open + " , BARSPACE: " + barSpace);
 
                 trans.pointValuesToPixel(mBodyBuffers);
 
