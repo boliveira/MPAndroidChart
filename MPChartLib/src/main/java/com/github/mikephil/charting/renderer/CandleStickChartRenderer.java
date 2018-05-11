@@ -156,9 +156,11 @@ public class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
                 mBodyBuffers[2] = (xPos + 0.5f - barSpace);
                 mBodyBuffers[3] = open * phaseY;
 
-                Log.d("[CandleStickChartRende]", "mBodyBuffers[0, 1, 2, 3]: " + mBodyBuffers[0] + " " + mBodyBuffers[1] + " " + mBodyBuffers[2] + " " + mBodyBuffers[3]);
+                Log.d("[CandleStickChartRende]", "mBodyBuffers[0, 1, 2, 3] BEFORE TRANS: " + mBodyBuffers[0] + " " + mBodyBuffers[1] + " " + mBodyBuffers[2] + " " + mBodyBuffers[3]);
 
                 trans.pointValuesToPixel(mBodyBuffers);
+
+                Log.d("[CandleStickChartRende]", "mBodyBuffers[0, 1, 2, 3] AFTER TRANS: " + mBodyBuffers[0] + " " + mBodyBuffers[1] + " " + mBodyBuffers[2] + " " + mBodyBuffers[3]);
 
                 // draw body differently for increasing and decreasing entry
                 if (open > close) { // decreasing
