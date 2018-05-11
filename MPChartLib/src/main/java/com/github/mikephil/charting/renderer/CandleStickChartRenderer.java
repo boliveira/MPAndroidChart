@@ -151,9 +151,9 @@ public class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
 
                 Log.d("[CandleStickChartRende]", "xPos: " + xPos + " , barSpace: " + barSpace + " , close: " + close + " , phaseY: " + phaseY + " , open: " + open);
 
-                mBodyBuffers[0] = xPos - 0.5f + barSpace;
+                mBodyBuffers[0] = xPos - 10f + barSpace;
                 mBodyBuffers[1] = close * phaseY;
-                mBodyBuffers[2] = (xPos + 0.5f - barSpace);
+                mBodyBuffers[2] = (xPos + 10f - barSpace);
                 mBodyBuffers[3] = open * phaseY;
 
                 Log.d("[CandleStickChartRende]", "mBodyBuffers[0, 1, 2, 3] BEFORE TRANS: " + mBodyBuffers[0] + " " + mBodyBuffers[1] + " " + mBodyBuffers[2] + " " + mBodyBuffers[3]);
