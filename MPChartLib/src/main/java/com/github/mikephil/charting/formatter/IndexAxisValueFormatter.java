@@ -1,6 +1,8 @@
 
 package com.github.mikephil.charting.formatter;
 
+import android.util.Log;
+
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -46,6 +48,10 @@ public class IndexAxisValueFormatter implements IAxisValueFormatter
 
     public String getFormattedValue(float value, AxisBase axis) {
         int index = Math.round(value);
+
+        int valueAsInt = (int) value;
+
+        Log.d("[IndexAxisValueFormat]", "Value: " + value + " , Index: " + index + " , valueAsInt: " +  valueAsInt + " , index != valueAsInt: " + (index != valueAsInt) );
 
         if (index < 0 || index >= mValueCount || index != (int)value)
             return "";
