@@ -47,13 +47,13 @@ public class IndexAxisValueFormatter implements IAxisValueFormatter
     }
 
     public String getFormattedValue(float value, AxisBase axis) {
-        int index = Math.round(value);
+        int index = (int) value;
 
-        int valueAsInt = (int) value;
+        //int valueAsInt = (int) value;
 
-        Log.d("[IndexAxisValueFormat]", "Value: " + value + " , Index: " + index + " , valueAsInt: " +  valueAsInt + " , index != valueAsInt: " + (index != valueAsInt) );
+        //Log.d("[IndexAxisValueFormat]", "Value: " + value + " , Index: " + index + " , valueAsInt: " +  valueAsInt + " , index != valueAsInt: " + (index != valueAsInt) );
 
-        if (index < 0 || index >= mValueCount || index != (int)value)
+        if (index < 0 || index >= mValueCount)
             return "";
 
         return mValues[index];
