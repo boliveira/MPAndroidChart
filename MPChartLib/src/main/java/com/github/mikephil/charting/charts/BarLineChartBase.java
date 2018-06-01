@@ -960,6 +960,9 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
             @Override
             public void run() {
 
+                Log.d("[BarLineChartBase]", "[on_runnable] restrainViewPort called with left: " + left + " top: " + top + " right: " + right
+                + " bottom: " + bottom);
+
                 mViewPortHandler.restrainViewPort(left, top, right, bottom);
                 prepareOffsetMatrix();
                 prepareValuePxMatrix();
