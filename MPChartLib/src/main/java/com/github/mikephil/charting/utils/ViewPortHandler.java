@@ -4,10 +4,11 @@ package com.github.mikephil.charting.utils;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.view.View;
+import android.util.Log;
 
 /**
- * Class that contains information about the charts current viewport settings, including offsets, scale & translation
- * levels, ...
+ * Class that contains information about the charts current viewport settings,
+ * including offsets, scale & translation levels, ...
  *
  * @author Philipp Jahoda
  */
@@ -110,10 +111,12 @@ public class ViewPortHandler {
             return false;
     }
 
-    public void restrainViewPort(float offsetLeft, float offsetTop, float offsetRight,
-                                 float offsetBottom) {
-        mContentRect.set(offsetLeft, offsetTop, mChartWidth - offsetRight, mChartHeight
-                - offsetBottom);
+    public void restrainViewPort(float offsetLeft, float offsetTop, float offsetRight, float offsetBottom) {
+
+        Log.d("[ViewPortHandler]", "RestrainViewPort called with offsetLeft: " + offsetLeft + " offsetTop: " + offsetTop
+                + " offsetRight: " + offsetRight + " offsetBottom: " + offsetBottom);
+
+        mContentRect.set(offsetLeft, offsetTop, mChartWidth - offsetRight, mChartHeight - offsetBottom);
     }
 
     public float offsetLeft() {
@@ -187,8 +190,7 @@ public class ViewPortHandler {
     /** CODE BELOW THIS RELATED TO SCALING AND GESTURES */
 
     /**
-     * Zooms in by 1.4f, x and y are the coordinates (in pixels) of the zoom
-     * center.
+     * Zooms in by 1.4f, x and y are the coordinates (in pixels) of the zoom center.
      *
      * @param x
      * @param y
@@ -225,6 +227,7 @@ public class ViewPortHandler {
 
     /**
      * Zooms out to original size.
+     * 
      * @param outputMatrix
      */
     public void resetZoom(Matrix outputMatrix) {
@@ -317,8 +320,7 @@ public class ViewPortHandler {
     protected float[] valsBufferForFitScreen = new float[9];
 
     /**
-     * Resets all zooming and dragging and makes the chart fit exactly it's
-     * bounds.
+     * Resets all zooming and dragging and makes the chart fit exactly it's bounds.
      */
     public Matrix fitScreen() {
 
@@ -328,8 +330,8 @@ public class ViewPortHandler {
     }
 
     /**
-     * Resets all zooming and dragging and makes the chart fit exactly it's
-     * bounds.  Output Matrix is available for those who wish to cache the object.
+     * Resets all zooming and dragging and makes the chart fit exactly it's bounds.
+     * Output Matrix is available for those who wish to cache the object.
      */
     public void fitScreen(Matrix outputMatrix) {
         mMinScaleX = 1f;
@@ -354,7 +356,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Post-translates to the specified points.  Less Performant.
+     * Post-translates to the specified points. Less Performant.
      *
      * @param transformedPts
      * @return
@@ -367,7 +369,8 @@ public class ViewPortHandler {
     }
 
     /**
-     * Post-translates to the specified points.  Output matrix allows for caching objects.
+     * Post-translates to the specified points. Output matrix allows for caching
+     * objects.
      *
      * @param transformedPts
      * @return
@@ -383,10 +386,10 @@ public class ViewPortHandler {
     protected Matrix mCenterViewPortMatrixBuffer = new Matrix();
 
     /**
-     * Centers the viewport around the specified position (x-index and y-value)
-     * in the chart. Centering the viewport outside the bounds of the chart is
-     * not possible. Makes most sense in combination with the
-     * setScaleMinima(...) method.
+     * Centers the viewport around the specified position (x-index and y-value) in
+     * the chart. Centering the viewport outside the bounds of the chart is not
+     * possible. Makes most sense in combination with the setScaleMinima(...)
+     * method.
      *
      * @param transformedPts the position to center view viewport to
      * @param view
@@ -683,8 +686,7 @@ public class ViewPortHandler {
     }
 
     /**
-     * Returns true if the chart is fully zoomed out on it's x-axis
-     * (horizontal).
+     * Returns true if the chart is fully zoomed out on it's x-axis (horizontal).
      *
      * @return
      */
@@ -693,8 +695,8 @@ public class ViewPortHandler {
     }
 
     /**
-     * Set an offset in dp that allows the user to drag the chart over it's
-     * bounds on the x-axis.
+     * Set an offset in dp that allows the user to drag the chart over it's bounds
+     * on the x-axis.
      *
      * @param offset
      */
@@ -703,8 +705,8 @@ public class ViewPortHandler {
     }
 
     /**
-     * Set an offset in dp that allows the user to drag the chart over it's
-     * bounds on the y-axis.
+     * Set an offset in dp that allows the user to drag the chart over it's bounds
+     * on the y-axis.
      *
      * @param offset
      */
