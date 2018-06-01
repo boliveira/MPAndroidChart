@@ -225,9 +225,6 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
         // make sure the data cannot be drawn outside the content-rect
         int clipRestoreCount = canvas.save();
-
-        Log.d("[BarLineChartBase]", "onDrawCalled. going to clipRect");
-
         canvas.clipRect(mViewPortHandler.getContentRect());
 
         mRenderer.drawData(canvas);
@@ -953,26 +950,10 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
      * @param bottom
      */
     public void setViewPortOffsets(final float left, final float top, final float right, final float bottom) {
-
-        Log.d("[BarLineChartBase]", "setViewPortOffsets called with left: " + left + " top: " + top + " right: " + right
-                + " bottom: " + bottom);
-
         mCustomViewPortEnabled = true;
         mViewPortHandler.restrainViewPort(left, top, right, bottom);
         prepareOffsetMatrix();
         prepareValuePxMatrix();
-
-        // post(new Runnable() {
-
-        //     @Override
-        //     public void run() {
-
-        //         Log.d("[BarLineChartBase]", "[on_runnable] restrainViewPort called with left: " + left + " top: " + top + " right: " + right
-        //         + " bottom: " + bottom);
-
-                
-        //     }
-        // });
     }
 
     /**

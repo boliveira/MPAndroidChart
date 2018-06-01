@@ -112,10 +112,6 @@ public class ViewPortHandler {
     }
 
     public void restrainViewPort(float offsetLeft, float offsetTop, float offsetRight, float offsetBottom) {
-
-        Log.d("[ViewPortHandler]", "RestrainViewPort called with offsetLeft: " + offsetLeft + " offsetTop: " + offsetTop
-                + " offsetRight: " + offsetRight + " offsetBottom: " + offsetBottom);
-
         mContentRect.set(offsetLeft, offsetTop, mChartWidth - offsetRight, mChartHeight - offsetBottom);
     }
 
