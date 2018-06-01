@@ -958,19 +958,21 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
                 + " bottom: " + bottom);
 
         mCustomViewPortEnabled = true;
-        post(new Runnable() {
+        mViewPortHandler.restrainViewPort(left, top, right, bottom);
+        prepareOffsetMatrix();
+        prepareValuePxMatrix();
 
-            @Override
-            public void run() {
+        // post(new Runnable() {
 
-                Log.d("[BarLineChartBase]", "[on_runnable] restrainViewPort called with left: " + left + " top: " + top + " right: " + right
-                + " bottom: " + bottom);
+        //     @Override
+        //     public void run() {
 
-                mViewPortHandler.restrainViewPort(left, top, right, bottom);
-                prepareOffsetMatrix();
-                prepareValuePxMatrix();
-            }
-        });
+        //         Log.d("[BarLineChartBase]", "[on_runnable] restrainViewPort called with left: " + left + " top: " + top + " right: " + right
+        //         + " bottom: " + bottom);
+
+                
+        //     }
+        // });
     }
 
     /**
