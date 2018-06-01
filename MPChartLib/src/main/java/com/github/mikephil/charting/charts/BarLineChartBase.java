@@ -225,6 +225,9 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
         // make sure the data cannot be drawn outside the content-rect
         int clipRestoreCount = canvas.save();
+
+        Log.d("[BarLineChartBase]", "onDrawCalled. going to clipRect");
+
         canvas.clipRect(mViewPortHandler.getContentRect());
 
         mRenderer.drawData(canvas);
