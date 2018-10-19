@@ -13,14 +13,14 @@ import com.github.mikephil.charting.utils.Utils;
 public class XAxis extends AxisBase {
 
     /**
-     * width of the x-axis labels in pixels - this is automatically
-     * calculated by the computeSize() methods in the renderers
+     * width of the x-axis labels in pixels - this is automatically calculated by
+     * the computeSize() methods in the renderers
      */
     public int mLabelWidth = 1;
 
     /**
-     * height of the x-axis labels in pixels - this is automatically
-     * calculated by the computeSize() methods in the renderers
+     * height of the x-axis labels in pixels - this is automatically calculated by
+     * the computeSize() methods in the renderers
      */
     public int mLabelHeight = 1;
 
@@ -42,8 +42,8 @@ public class XAxis extends AxisBase {
     protected float mLabelRotationAngle = 0f;
 
     /**
-     * if set to true, the chart will avoid that the first and last label entry
-     * in the chart "clip" off the edge of the chart
+     * if set to true, the chart will avoid that the first and last label entry in
+     * the chart "clip" off the edge of the chart
      */
     private boolean mAvoidFirstLastClipping = false;
 
@@ -58,6 +58,11 @@ public class XAxis extends AxisBase {
     public enum XAxisPosition {
         TOP, BOTTOM, BOTH_SIDED, TOP_INSIDE, BOTTOM_INSIDE
     }
+
+    /**
+     * if set to true, will draw the first and last label entry inside the x axis
+     */
+    private boolean mForceFirstLastInsideAxis = false;
 
     public XAxis() {
         super();
@@ -98,8 +103,8 @@ public class XAxis extends AxisBase {
     }
 
     /**
-     * if set to true, the chart will avoid that the first and last label entry
-     * in the chart "clip" off the edge of the chart or the screen
+     * if set to true, the chart will avoid that the first and last label entry in
+     * the chart "clip" off the edge of the chart or the screen
      *
      * @param enabled
      */
@@ -115,4 +120,13 @@ public class XAxis extends AxisBase {
     public boolean isAvoidFirstLastClippingEnabled() {
         return mAvoidFirstLastClipping;
     }
+
+    public void setForceFirstLastInsideAxis(boolean enabled) {
+        mForceFirstLastInsideAxis = enabled;
+    }
+
+    public boolean isForceFirstLastInsideAxis(boolean enabled) {
+        return mForceFirstLastInsideAxis;
+    }
+
 }

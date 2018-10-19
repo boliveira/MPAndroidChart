@@ -204,14 +204,14 @@ public class XAxisRenderer extends AxisRenderer {
 
                 String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
 
-                if (mXAxis.isAvoidFirstLastClippingEnabled()) {
+                if (mXAxis.isAvoidFirstLastClippingEnabled() || mXAxis.isForceFirstLastInsideAxis()) {
 
                     // avoid clipping of the last
                     if (i == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
                         float width = Utils.calcTextWidth(mAxisLabelPaint, label);
 
                         if (width > mViewPortHandler.offsetRight() * 2
-                                && x + width > mViewPortHandler.getChartWidth())
+                                && x + width > mViewPortHandler.getChartWidth() || mXAxis.isForceFirstLastInsideAxis())
                             x -= width / 2;
 
                         // avoid clipping of the first
