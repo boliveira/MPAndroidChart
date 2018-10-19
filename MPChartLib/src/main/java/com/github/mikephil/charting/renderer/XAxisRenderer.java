@@ -190,55 +190,35 @@ public class XAxisRenderer extends AxisRenderer {
 
         mTrans.pointValuesToPixel(positions);
 
-        Log.d("[XAxisRenderer]", "before for loop. positions.length: " + positions.length);
-
         for (int i = 0; i < positions.length; i += 2) {
 
             float x = positions[i];
-
-            Log.d("[XAxisRenderer]", "for loop. i: " + i + " x: " + x);
 
             if (mViewPortHandler.isInBoundsX(x)) {
 
                 String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
 
-                Log.d("[XAxisRenderer]", "mXAxis.isForceFirstLastInsideAxis(): " + mXAxis.isForceFirstLastInsideAxis());
-
                 if (mXAxis.isAvoidFirstLastClippingEnabled() || mXAxis.isForceFirstLastInsideAxis()) {
-
-                    Log.d("[XAxisRenderer]", "inside if isForceFirstLastInsideAxis. i: " + i
-                            + " mAxis.mEntryCount - 1: " + (mXAxis.mEntryCount - 1));
-
-                    // avoid clipping of the last
 
                     int index = i / 2;
 
+                    // avoid clipping of the last
                     if (index == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
-
-                        Log.d("[XAxisRenderer]", "inside last point");
 
                         float width = Utils.calcTextWidth(mAxisLabelPaint, label);
 
                         if ((width > mViewPortHandler.offsetRight() * 2 && x + width > mViewPortHandler.getChartWidth())
                                 || mXAxis.isForceFirstLastInsideAxis()) {
-                            Log.d("[XAxisRenderer]", "going to change x offset");
-
                             x -= width / 2;
-                        } else {
-                            Log.d("[XAxisRenderer]", " _NOT_ going to change x offset");
                         }
-
                         // avoid clipping of the first
                     } else if (i == 0) {
-
                         float width = Utils.calcTextWidth(mAxisLabelPaint, label);
                         x += width / 2;
                     }
                 }
 
                 drawLabel(c, label, x, pos, anchor, labelRotationAngleDegrees);
-            } else {
-                Log.d("[XAxisRenderer]", "not isInBoundsX i: " + i);
             }
         }
     }

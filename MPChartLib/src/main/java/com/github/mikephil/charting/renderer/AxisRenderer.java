@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.util.Log;
 
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.utils.MPPointD;
@@ -52,7 +51,7 @@ public abstract class AxisRenderer extends Renderer {
         this.mTrans = trans;
         this.mAxis = axis;
 
-        if (mViewPortHandler != null) {
+        if(mViewPortHandler != null) {
 
             mAxisLabelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
@@ -82,7 +81,8 @@ public abstract class AxisRenderer extends Renderer {
     }
 
     /**
-     * Returns the Paint object that is used for drawing the grid-lines of the axis.
+     * Returns the Paint object that is used for drawing the grid-lines of the
+     * axis.
      *
      * @return
      */
@@ -122,8 +122,7 @@ public abstract class AxisRenderer extends Renderer {
         if (mViewPortHandler != null && mViewPortHandler.contentWidth() > 10 && !mViewPortHandler.isFullyZoomedOutY()) {
 
             MPPointD p1 = mTrans.getValuesByTouchPoint(mViewPortHandler.contentLeft(), mViewPortHandler.contentTop());
-            MPPointD p2 = mTrans.getValuesByTouchPoint(mViewPortHandler.contentLeft(),
-                    mViewPortHandler.contentBottom());
+            MPPointD p2 = mTrans.getValuesByTouchPoint(mViewPortHandler.contentLeft(), mViewPortHandler.contentBottom());
 
             if (!inverted) {
 
@@ -143,8 +142,7 @@ public abstract class AxisRenderer extends Renderer {
     }
 
     /**
-     * Sets up the axis values. Computes the desired number of labels between the
-     * two given extremes.
+     * Sets up the axis values. Computes the desired number of labels between the two given extremes.
      *
      * @return
      */
@@ -157,8 +155,8 @@ public abstract class AxisRenderer extends Renderer {
         double range = Math.abs(yMax - yMin);
 
         if (labelCount == 0 || range <= 0 || Double.isInfinite(range)) {
-            mAxis.mEntries = new float[] {};
-            mAxis.mCenteredEntries = new float[] {};
+            mAxis.mEntries = new float[]{};
+            mAxis.mCenteredEntries = new float[]{};
             mAxis.mEntryCount = 0;
             return;
         }
@@ -167,8 +165,7 @@ public abstract class AxisRenderer extends Renderer {
         double rawInterval = range / labelCount;
         double interval = Utils.roundToNextSignificant(rawInterval);
 
-        // If granularity is enabled, then do not allow the interval to go below
-        // specified granularity.
+        // If granularity is enabled, then do not allow the interval to go below specified granularity.
         // This is used to avoid repeated values when rounding values for display.
         if (mAxis.isGranularityEnabled())
             interval = interval < mAxis.getGranularity() ? mAxis.getGranularity() : interval;
@@ -197,18 +194,10 @@ public abstract class AxisRenderer extends Renderer {
 
             float v = min;
 
-            Log.d("AxisRenderer", "interval: " + interval);
-
-            for (int i = 0; i < labelCount - 1; i++) {
-                Log.d("AxisRenderer", "setting mEntry[" + i + "] to: " + v);
-
+            for (int i = 0; i < labelCount; i++) {
                 mAxis.mEntries[i] = v;
                 v += interval;
             }
-
-            mAxis.mEntries[labelCount - 1] = max;
-
-            Log.d("AxisRenderer", "setting las entry to: " + max);
 
             n = labelCount;
 
@@ -216,7 +205,7 @@ public abstract class AxisRenderer extends Renderer {
         } else {
 
             double first = interval == 0.0 ? 0.0 : Math.ceil(yMin / interval) * interval;
-            if (mAxis.isCenterAxisLabelsEnabled()) {
+            if(mAxis.isCenterAxisLabelsEnabled()) {
                 first -= interval;
             }
 
@@ -260,7 +249,7 @@ public abstract class AxisRenderer extends Renderer {
                 mAxis.mCenteredEntries = new float[n];
             }
 
-            float offset = (float) interval / 2f;
+            float offset = (float)interval / 2f;
 
             for (int i = 0; i < n; i++) {
                 mAxis.mCenteredEntries[i] = mAxis.mEntries[i] + offset;
