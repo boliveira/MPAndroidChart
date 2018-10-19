@@ -199,12 +199,16 @@ public abstract class AxisRenderer extends Renderer {
 
             Log.d("AxisRenderer", "interval: " + interval);
 
-            for (int i = 0; i < labelCount; i++) {
+            for (int i = 0; i < labelCount - 1; i++) {
                 Log.d("AxisRenderer", "setting mEntry[" + i + "] to: " + v);
 
                 mAxis.mEntries[i] = v;
                 v += interval;
             }
+
+            mAxis.mEntries[labelCount - 1] = max;
+
+            Log.d("AxisRenderer", "setting las entry to: " + max);
 
             n = labelCount;
 
