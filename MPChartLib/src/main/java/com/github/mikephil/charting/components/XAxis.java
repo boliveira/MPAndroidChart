@@ -125,7 +125,7 @@ public class XAxis extends AxisBase {
         mForceFirstLastInsideAxis = enabled;
     }
 
-    public boolean isForceFirstLastInsideAxis(boolean enabled) {
+    public boolean isForceFirstLastInsideAxis() {
         return mForceFirstLastInsideAxis;
     }
 
