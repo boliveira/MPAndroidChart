@@ -210,7 +210,10 @@ public class XAxisRenderer extends AxisRenderer {
                             + " mAxis.mEntryCount - 1: " + (mXAxis.mEntryCount - 1));
 
                     // avoid clipping of the last
-                    if (i == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
+
+                    int index = i / 2;
+
+                    if (index == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
 
                         Log.d("[XAxisRenderer]", "inside last point");
 
