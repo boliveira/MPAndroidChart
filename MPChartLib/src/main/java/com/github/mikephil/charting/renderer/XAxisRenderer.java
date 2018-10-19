@@ -202,8 +202,13 @@ public class XAxisRenderer extends AxisRenderer {
 
                 if (mXAxis.isAvoidFirstLastClippingEnabled() || mXAxis.isForceFirstLastInsideAxis()) {
 
+                    Log.d("[XAxisRenderer]", "inside if isForceFirstLastInsideAxis. i: " + i);
+
                     // avoid clipping of the last
                     if (i == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
+
+                        Log.d("[XAxisRenderer]", "inside last point");
+
                         float width = Utils.calcTextWidth(mAxisLabelPaint, label);
 
                         if ((width > mViewPortHandler.offsetRight() * 2 && x + width > mViewPortHandler.getChartWidth())
