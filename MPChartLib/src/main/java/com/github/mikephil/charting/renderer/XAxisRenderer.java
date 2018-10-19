@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
@@ -86,11 +87,8 @@ public class XAxisRenderer extends AxisRenderer {
         final float labelWidth = labelSize.width;
         final float labelHeight = Utils.calcTextHeight(mAxisLabelPaint, "Q");
 
-        final FSize labelRotatedSize = Utils.getSizeOfRotatedRectangleByDegrees(
-                labelWidth,
-                labelHeight,
+        final FSize labelRotatedSize = Utils.getSizeOfRotatedRectangleByDegrees(labelWidth, labelHeight,
                 mXAxis.getLabelRotationAngle());
-
 
         mXAxis.mLabelWidth = Math.round(labelWidth);
         mXAxis.mLabelHeight = Math.round(labelHeight);
@@ -113,7 +111,7 @@ public class XAxisRenderer extends AxisRenderer {
         mAxisLabelPaint.setTextSize(mXAxis.getTextSize());
         mAxisLabelPaint.setColor(mXAxis.getTextColor());
 
-        MPPointF pointF = MPPointF.getInstance(0,0);
+        MPPointF pointF = MPPointF.getInstance(0, 0);
         if (mXAxis.getPosition() == XAxisPosition.TOP) {
             pointF.x = 0.5f;
             pointF.y = 1.0f;
@@ -155,20 +153,16 @@ public class XAxisRenderer extends AxisRenderer {
         mAxisLinePaint.setStrokeWidth(mXAxis.getAxisLineWidth());
         mAxisLinePaint.setPathEffect(mXAxis.getAxisLineDashPathEffect());
 
-        if (mXAxis.getPosition() == XAxisPosition.TOP
-                || mXAxis.getPosition() == XAxisPosition.TOP_INSIDE
+        if (mXAxis.getPosition() == XAxisPosition.TOP || mXAxis.getPosition() == XAxisPosition.TOP_INSIDE
                 || mXAxis.getPosition() == XAxisPosition.BOTH_SIDED) {
-            c.drawLine(mViewPortHandler.contentLeft(),
-                    mViewPortHandler.contentTop(), mViewPortHandler.contentRight(),
+            c.drawLine(mViewPortHandler.contentLeft(), mViewPortHandler.contentTop(), mViewPortHandler.contentRight(),
                     mViewPortHandler.contentTop(), mAxisLinePaint);
         }
 
-        if (mXAxis.getPosition() == XAxisPosition.BOTTOM
-                || mXAxis.getPosition() == XAxisPosition.BOTTOM_INSIDE
+        if (mXAxis.getPosition() == XAxisPosition.BOTTOM || mXAxis.getPosition() == XAxisPosition.BOTTOM_INSIDE
                 || mXAxis.getPosition() == XAxisPosition.BOTH_SIDED) {
-            c.drawLine(mViewPortHandler.contentLeft(),
-                    mViewPortHandler.contentBottom(), mViewPortHandler.contentRight(),
-                    mViewPortHandler.contentBottom(), mAxisLinePaint);
+            c.drawLine(mViewPortHandler.contentLeft(), mViewPortHandler.contentBottom(),
+                    mViewPortHandler.contentRight(), mViewPortHandler.contentBottom(), mAxisLinePaint);
         }
     }
 
@@ -204,15 +198,22 @@ public class XAxisRenderer extends AxisRenderer {
 
                 String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
 
+                Log.d("[XAxisRenderer]", "mXAxis.isForceFirstLastInsideAxis(): " + mXAxis.isForceFirstLastInsideAxis());
+
                 if (mXAxis.isAvoidFirstLastClippingEnabled() || mXAxis.isForceFirstLastInsideAxis()) {
 
                     // avoid clipping of the last
                     if (i == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
                         float width = Utils.calcTextWidth(mAxisLabelPaint, label);
 
-                        if (width > mViewPortHandler.offsetRight() * 2
-                                && x + width > mViewPortHandler.getChartWidth() || mXAxis.isForceFirstLastInsideAxis())
+                        if ((width > mViewPortHandler.offsetRight() * 2 && x + width > mViewPortHandler.getChartWidth())
+                                || mXAxis.isForceFirstLastInsideAxis()) {
+                            Log.d("[XAxisRenderer]", "going to change x offset");
+
                             x -= width / 2;
+                        } else {
+                            Log.d("[XAxisRenderer]", " _NOT_ going to change x offset");
+                        }
 
                         // avoid clipping of the first
                     } else if (i == 0) {
@@ -230,8 +231,10 @@ public class XAxisRenderer extends AxisRenderer {
     protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
         Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
     }
+
     protected Path mRenderGridLinesPath = new Path();
     protected float[] mRenderGridLinesBuffer = new float[2];
+
     @Override
     public void renderGridLines(Canvas c) {
 
@@ -241,7 +244,7 @@ public class XAxisRenderer extends AxisRenderer {
         int clipRestoreCount = c.save();
         c.clipRect(getGridClippingRect());
 
-        if(mRenderGridLinesBuffer.length != mAxis.mEntryCount * 2){
+        if (mRenderGridLinesBuffer.length != mAxis.mEntryCount * 2) {
             mRenderGridLinesBuffer = new float[mXAxis.mEntryCount * 2];
         }
         float[] positions = mRenderGridLinesBuffer;
@@ -369,7 +372,6 @@ public class XAxisRenderer extends AxisRenderer {
             mLimitLinePaint.setColor(limitLine.getTextColor());
             mLimitLinePaint.setStrokeWidth(0.5f);
             mLimitLinePaint.setTextSize(limitLine.getTextSize());
-
 
             float xOffset = limitLine.getLineWidth() + limitLine.getXOffset();
 
