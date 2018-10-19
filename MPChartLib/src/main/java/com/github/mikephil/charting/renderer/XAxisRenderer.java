@@ -190,9 +190,13 @@ public class XAxisRenderer extends AxisRenderer {
 
         mTrans.pointValuesToPixel(positions);
 
+        Log.d("[XAxisRenderer]", "before for loop. positions.length: " + positions.length);
+
         for (int i = 0; i < positions.length; i += 2) {
 
             float x = positions[i];
+
+            Log.d("[XAxisRenderer]", "for loop. i: " + i + " x: " + x);
 
             if (mViewPortHandler.isInBoundsX(x)) {
 
@@ -202,7 +206,8 @@ public class XAxisRenderer extends AxisRenderer {
 
                 if (mXAxis.isAvoidFirstLastClippingEnabled() || mXAxis.isForceFirstLastInsideAxis()) {
 
-                    Log.d("[XAxisRenderer]", "inside if isForceFirstLastInsideAxis. i: " + i);
+                    Log.d("[XAxisRenderer]", "inside if isForceFirstLastInsideAxis. i: " + i
+                            + " mAxis.mEntryCount - 1: " + (mXAxis.mEntryCount - 1));
 
                     // avoid clipping of the last
                     if (i == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
@@ -229,6 +234,8 @@ public class XAxisRenderer extends AxisRenderer {
                 }
 
                 drawLabel(c, label, x, pos, anchor, labelRotationAngleDegrees);
+            } else {
+                Log.d("[XAxisRenderer]", "not isInBoundsX i: " + i);
             }
         }
     }
